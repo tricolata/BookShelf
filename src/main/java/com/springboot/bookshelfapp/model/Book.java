@@ -1,28 +1,50 @@
 package com.springboot.bookshelfapp.model;
 
-import java.util.List;
+import jakarta.persistence.*;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.List;
+import java.util.Set;
+
+@Entity
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
     private String author;
     private Integer yearPublished;
-    private List<String> genres;
 
-    public Book(String title, String author, Integer yearPublished, List<String> genres) {
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id")
+    private Set<Genre> genres;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return new EqualsBuilder().append(getId(), book.getId()).append(getTitle(), book.getTitle()).append(getAuthor(), book.getAuthor()).append(getYearPublished(), book.getYearPublished()).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(getId()).append(getTitle()).append(getAuthor()).append(getYearPublished()).toHashCode();
+    }
+
+    public Book(String title, String author, Integer yearPublished) {
         this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
-        this.genres = genres;
     }
 
-    public List<String> getGenres() {
-        return genres;
-    }
+    public Book() {
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
     }
 
     public Long getId() {
