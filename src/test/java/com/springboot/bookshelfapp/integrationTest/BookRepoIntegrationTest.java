@@ -21,7 +21,6 @@ public class BookRepoIntegrationTest {
     @Test
     public void whenSavingNewBook_thenSuccess() {
         Book newBook = new Book("title", "author", 2000);
-
         assertNotNull(repo.save(newBook));
     }
 
