@@ -6,27 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
-public class Book {
+@NoArgsConstructor
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "book_id")
+    @Column(name = "category_id")
     private Long id;
 
     private String name;
 
-    private String author;
-
-    private Double price;
-
-    private String product_url;
-
-    private String image_url;
-
-    private String notes;
-
-    private Integer rating;
 }
