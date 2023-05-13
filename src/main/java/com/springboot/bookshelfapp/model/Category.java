@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/*
+    Contains the Book Categories Information
+ */
 @Entity
 @Getter
 @Setter

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -16,11 +18,13 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    private Long price;
-
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @OneToMany
+    @JoinColumn(name = "item_id")
+    private Set<Item> items;
 
     private Integer quantity;
 }
